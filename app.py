@@ -4,24 +4,43 @@ import os
 from bson.objectid import ObjectId
 from datetime import datetime
 
+from pymongo import MongoClient
+
+client = MongoClient()
+db = client.items
+items = db.items
 
 app = Flask(__name__)
+#
+#
+# items = [
+#    { 'title': 'Great Playlist' },
+#    { 'title': 'Next Playlist' }
+#  ]
 
 @app.route('/')
-def index():
-    """Return homepage."""
-    return render_template('home.html', msg='What are we selling!')
-
-items = [
-    { 'title': 'Cat Videos', 'description': 'Cats acting weird', 'img': 'img src="https://via.placeholder.com/150', 'in_cart' : TRUE },
-    { 'title': '80\'s Music', 'description': 'Don\'t stop believing!' }
-]
-@app.route('/items')
-def itemss_index():
+def items_index():
     """Show all items."""
-    return render_template('items.html', items=items)
+    return render_template('items_index.html', items=items.find())
 
-@app.route('/cart')
-def cart():
-    """display user's shopping cart"""
-    return render_template('cart.html', items=items.find())
+# @app.route('/cart')
+# def cart():
+#     """display user's shopping cart"""
+#     return render_template('cart.html', items=items.find())
+
+@app.route('/items/new')
+def items_new():
+    """Create a new item."""
+    return render_template('items_new.html')
+
+
+@app.route('/items', methods=['POST'])
+def items_submit():
+    """Submit a new item."""
+    item = {
+        'title': request.form.get('title'),
+        'description': request.form.get('description'),
+        'pics': request.form.get('pics').split()
+    }
+    items.insert_one(item)
+    return redirect(url_for('items_index'))

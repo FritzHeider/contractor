@@ -1,0 +1,13 @@
+<!-- templates/items_index.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>items</h1>
+
+<a href='/items/new'>New item</a>
+
+{% for item in items %}
+    <h2>{{ item.title }}</h2>
+    <small>{{ item.description }}</small>
+{% endfor %}
+{% endblock %}
