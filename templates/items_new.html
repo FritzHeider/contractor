@@ -1,33 +1,13 @@
-<!-- templates/items_new.html -->
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
-{% block content %}
-<form method='POST' action='/items'>
-    <fieldset>
-        <legend>New item</legend>
-        <!-- TITLE -->
-        <p>
-            <label for='item-title'>Title</label><br>
-            <input id='item-title' type='text' name='title' />
-        </p>
+{% block title %}New item{% endblock %}
 
-        <!-- DESCRIPTION -->
-        <p>
-            <label for='description'>Description</label><br>
-            <input id='description' type='text' name='description' />
-        </p>
-
-        <!-- VIDEO LINKS -->
-        <p>
-            <label for='item-Pics'>Pics</label><br>
-            <p>Add Pics in the form of 'https://youtube.com/embed/KEY'. Separate with a newline.</p>
-            <textarea id='item-Pics' name='Pics' rows='10'></textarea>
-        </p>
-    </fieldset>
-
-    <!-- BUTTON -->
-    <p>
-        <button type='submit'>Save item</button>
-    </p>
-</form>
+{% block body %}
+<div class='row'>
+    <div class='col-sm-6 col-sm-offset-3'>
+        <form method='POST' action='/items/new'>
+            {% include 'partials/items_form.html' %}
+        </form>
+    </div>
+</div>
 {% endblock %}

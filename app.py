@@ -1,10 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 from pymongo import MongoClient
-import os
-from bson.objectid import ObjectId
-from datetime import datetime
 
-from pymongo import MongoClient
+
 
 client = MongoClient()
 db = client.items
@@ -14,8 +11,8 @@ app = Flask(__name__)
 #
 #
 # items = [
-#    { 'title': 'Great Playlist' },
-#    { 'title': 'Next Playlist' }
+#    { 'title': 'Great item' },
+#    { 'title': 'Next item' }
 #  ]
 
 @app.route('/')
@@ -34,13 +31,15 @@ def items_new():
     return render_template('items_new.html')
 
 
+
+
+    @app.route('/thanks')
+    def items_index():
+        """Show all items."""
+        return render_template('items_index.html', items=items.find())
+
 @app.route('/items', methods=['POST'])
 def items_submit():
     """Submit a new item."""
-    item = {
-        'title': request.form.get('title'),
-        'description': request.form.get('description'),
-        'pics': request.form.get('pics').split()
-    }
-    items.insert_one(item)
+    print(request.form.to_dict())
     return redirect(url_for('items_index'))
