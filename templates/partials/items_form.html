@@ -1,0 +1,25 @@
+
+<fieldset>
+<legend>{{title}}</legend>
+<!-- NAME -->
+<div class="form-group">
+  <label for="item-name">Name</label><br>
+  <input id="item-name" type="text" name="name" value="{{ item.name }}"/>
+</div>
+<!-- PRICE -->
+<div class="form-group">
+  <label for="item-price">Price</label><br>
+  $<input id="item-price" type="text" name="price" value="{{ item.price }}"/>
+</div>
+<!-- IMAGE -->
+<div class="form-group">
+  <label for="item-image">Image URL</label><br>
+  <input id="item-image" type="text" name="image" value="{{ item.image }}">
+</div>
+</fieldset>
+
+<!-- BUTTON -->
+<div class="form-group">
+  <button type="submit" formaction="/" formmethod="GET">Cancel</button>
+  <button type="submit">Save item</button>
+</div>

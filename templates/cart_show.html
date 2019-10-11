@@ -1,11 +1,13 @@
 
 {% extends 'base.html' %}
 
-{% block title %}item{% endblock %}
+{% block title %}Your shopping cart{% endblock %}
 
 {% block body %}
     <a href='/'>Back to Home</a>
+        {%for item in cart%}
     <div class='row'>
+
         <div class='col-sm-6 col-sm-offset-3'>
             <h1>{{ item.name }}</h1>
             <img src="{{ item.image }}" alt="item Image" width="350" height="350">
@@ -22,6 +24,8 @@
                 <input type="text" id="quant" name="quant">
                 <button type='submit'>Add to Cart</button>
             </form></p>
+
         </div>
     </div>
+    {% endfor %}
 {% endblock %}
