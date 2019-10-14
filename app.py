@@ -7,7 +7,9 @@ from datetime import datetime
 
 app = Flask(__name__)
 
-host = os.environ.get("MONGODB_URI", "mongodb://localhost:27017/contractor")
+host = os.environ.get('MONGODB_URI', "mongodb://heroku_wm6zd8jl:j4v47b6f6i4ba17b9b712qf8hn@ds333238.mlab.com:33238/heroku_wm6zd8jl")
+#host = os.environ.get("MONGODB_URI", "mongodb://localhost:27017/contractor")
+
 client = MongoClient(host=f"{host}?retryWrites=false")
 db = client.get_default_database()
 items = db.items
